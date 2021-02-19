@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+<body>
+{% block body %}
+<nav style= "background-color: #26a69a;">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">Todo List</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="">{{ request.user.username }}</a></li>
+          <li><a href="{% url 'logout' %}"><i class="material-icons">power_settings_new</i></a></li>
+      </ul>
+    </div>
+</nav>
+    <div class="container">
+        <h1 align="center">Welcome</h1>
+        
+            
+        <div class="row">
+            <!-------inputbox----------->
+            <div class="col-md-7">
+                    <div class="row">
+                        <div class="col s11">
+                            <input type="text" class="form-control lg" id="id_message" aria-describedat="newTaskHelp" placeholder="Enter the name of the task"></input> 
+                            <small id="newTaskHelp" class="form-text lg text-muted">A short one line description of the task </small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-6 p-1">
+                                <button type="button" class="btn btn-success btn-md col" id="btnAdd" style="width: 100%;"><i class="fa fa-plus-square"></i> Add</button>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-6 p-1">
+                                <button type="button" class="btn btn-warning btn-md col" id="btnCln"  style="width: 100%;"><i class="fas fa-trash"></i> Clean Up</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+            </div>
+            <!-----------buttons------->
+            <!------------Task List------->
+            <ul class="row list-group" id="ulTasks"></ul>
+        </div>
+
+    </div>
+    
+    
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        user_id = "{{ request.user.id }}";
+        //for delete
+        
+        $(function () { $('#board').on('load',receive(user_id) )
+        function receive(user_id) {
+            // console.log("get method clicked."+ user_id)
+        $.ajax({
+            url: 'messages/'+user_id+'/',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                // console.log(data);
+                var text_box = '<li class="card-panel" style="font-size: 20px">{message}</li>';
+                if (data.length !== 0)
+                {
+                    for(var i=0;i<data.length;i++) {
+                        // console.log(data[i]);
+                        box = text_box.replace('{message}', data[i].task);
+                        // console.log(box)
+                        $('#ulTasks').append(box);
+                    }
+                }
+            },
+            error: function (data) {console.log(data) }
+        });
+        }
+        })
+        //For sending
+        $(function () {
+            $('#btnAdd').on('click', function (event) {
+                event.preventDefault();
+                var task = $('#id_message');
+                send('{{ request.user.username }}', task.val() );
+                task.val('');
+            })
+        })
+        //delete
+        $(function () {
+            $('#btnCln').on('click', function (event) {
+                event.preventDefault();
+                delete_task('{{ request.user.username }}', '{{ request.user.id }}' );
+                
+            })
+        })
+    </script>
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My TO-DO List</title>
+    <div style="padding-top: 80px;">
+    <h1 style="text-align: center;font-family:Arial, Helvetica, sans-serif;vertical-align:middle;">My TO-DO List</h1>
+    </div>
+    <!--Made with love by Mutiullah Samim -->
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+{% block body %}
+<div class="container">
+	<div class="d-flex justify-content-center h-60 w-100 align-items-center">
+		<div class="card">
+			<div class="card-header">
+				<h3 style="text-align: center;font-family:Arial, Helvetica, sans-serif;vertical-align:middle;">Sign Up</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+                {% block form %}
+				<form id="register-form" action="{%url 'register'%}" class="form-group" method="POST">
+                    {% csrf_token %}
+                        <!-- <div class="row">
+                            <div class="input-field col s12">
+                                {{ form.firstname }}
+                                <label for="firstname">Firstname</label>
+                                <input type="text" class="form-control lg" id="firstname" aria-describedat="firstnameHelp" placeholder="Enter the firstname"></input> 
+                                <small id="firstnameHelp" class="form-text lg text-muted">Provide a firstname for your account</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ form.lastname }}
+                                <label for="lastname">Lastname</label>
+                                <input type="text" class="form-control lg" id="lastname" aria-describedat="lastnameHelp" placeholder="Enter the lastname"></input> 
+                                <small id="lastnameHelp" class="form-text lg text-muted">Provide a lastname for your account</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ form.email }}
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control lg" id="email" aria-describedat="emailHelp" placeholder="Enter the email"></input> 
+                                <small id="emailHelp" class="form-text lg text-muted">Provide a email for your account</small>
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ form.username }}
+                                <label for="username" data-error="Username already taken">Username</label>
+                                <!-- <input type="text" class="form-control lg" id="username" aria-describedat="usernameHelp" placeholder="Enter the username"></input> 
+                                <small id="usernameHelp" class="form-text lg text-muted">Provide a username for your account</small> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ form.password1 }}
+                                <label for="password1">Password</label>
+                                <!-- <input type="password" class="form-control lg" id="password" aria-describedat="passwordHelp" placeholder="Enter the password"></input> 
+                                <small id="passwordHelp" class="form-text lg text-muted">Provide a password for your account</small> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ form.password2 }}
+                                <label for="password2">Repeat Password</label>
+                                <!-- <input type="password" class="form-control lg" id="password1" aria-describedat="password1Help" placeholder="Enter the Same password as above"></input> 
+                                <small id="password1Help" class="form-text lg text-muted">Provide same password as above</small> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                            <div class="right">
+                                <button class="btn green waves-effect waves-light pull-s12">Register</button>
+                            </div>
+                            </div>
+                        </div>
+                </form>
+                {% endblock %}
+			</div>
+	</div>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,11 @@
+#ulTasks li.disabled {
+    text-decoration: line-through;
+}
+#ulTasks {
+    margin-top: 10px; 
+    align-items: center;
+}
+
+.btn { 
+    margin-top: 5px;
+}
